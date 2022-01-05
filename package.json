@@ -1,0 +1,23 @@
+{
+  "name": "yzy-webpack-react",
+  "version": "1.0.0",
+  "description": "A boilerplate for react + typescript development",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yzy7720/yzy-webpack-react.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "YiZhiyu",
+    "url": "https://github.com/yzy7720",
+    "email": "740343685@qq.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yzy7720/yzy-webpack-react/issues"
+  },
+  "homepage": "https://github.com/yzy7720/yzy-webpack-react#readme"
+}
