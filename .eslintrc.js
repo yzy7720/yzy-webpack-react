@@ -1,4 +1,5 @@
 const OFF = 0;
+const WARN = 1;
 const ERROR = 2;
 
 module.exports = {
@@ -10,71 +11,124 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    'plugin:eslint-comments/recommended',
-    'plugin:import/typescript',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
-    'prettier',
-    // 专门支持了 eslint-plugin-react
-    'prettier/react',
-    // 专门支持了 @typescript-eslint/eslint-plugin
-    'prettier/@typescript-eslint',
+    'plugin:promise/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
+      impliedStrict: true,
       jsx: true,
     },
-    ecmaVersion: 2020,
+    ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ['react', 'unicorn', 'promise', '@typescript-eslint', 'prettier'],
   settings: {
     'import/resolver': {
       node: {
-        // 指定 eslint-plugin-import 解析的后缀名
-        extensions: ['.ts', '.tsx', '.js', '.json'],
+        extensions: ['.tsx', '.ts', '.js', '.json'],
       },
-      typescript: {
-        // 配置 eslint-import-resolver-typescript 读取 tsconfig.json 的路径
-        // 目前用不着，先注释掉
-        // directory: [resolve('./src/tsconfig.json'), resolve('./scripts/tsconfig.json')],
-      },
+      typescript: {},
     },
   },
   rules: {
-    // 针对no-useless-constructor: Cannot read property 'body' of null，
-    'no-useless-constructor': 'off',
-    '@typescript-eslint/no-useless-constructor': 'error',
-    // 处理import/extensions 这个规则不能正确处理文件后缀名
     'import/extensions': [
       ERROR,
       'ignorePackages',
       {
         ts: 'never',
         tsx: 'never',
-        json: 'never',
         js: 'never',
       },
     ],
+    'import/no-extraneous-dependencies': [ERROR, { devDependencies: true }],
+    'import/prefer-default-export': OFF,
+    'import/no-unresolved': ERROR,
+    'import/no-dynamic-require': OFF,
+
+    'unicorn/better-regex': ERROR,
+    'unicorn/prevent-abbreviations': OFF,
+    'unicorn/filename-case': [
+      ERROR,
+      {
+        cases: {
+          // 中划线
+          kebabCase: true,
+          // 小驼峰
+          camelCase: true,
+          // 下划线
+          snakeCase: false,
+          // 大驼峰
+          pascalCase: true,
+        },
+      },
+    ],
+    'unicorn/no-array-instanceof': WARN,
+    'unicorn/no-for-loop': WARN,
+    'unicorn/prefer-add-event-listener': [
+      ERROR,
+      {
+        excludedPackages: ['koa', 'sax'],
+      },
+    ],
+    'unicorn/prefer-query-selector': ERROR,
+    'unicorn/no-null': OFF,
+    'unicorn/no-array-reduce': OFF,
+
+    '@typescript-eslint/no-useless-constructor': ERROR,
+    '@typescript-eslint/no-empty-function': WARN,
+    '@typescript-eslint/no-var-requires': OFF,
+    '@typescript-eslint/explicit-function-return-type': OFF,
+    '@typescript-eslint/explicit-module-boundary-types': OFF,
+    '@typescript-eslint/no-explicit-any': OFF,
+    '@typescript-eslint/no-use-before-define': ERROR,
+    '@typescript-eslint/no-unused-vars': WARN,
+    'no-unused-vars': OFF,
+
+    'react/jsx-filename-extension': [ERROR, { extensions: ['.tsx', 'ts', '.jsx', 'js'] }],
+    'react/jsx-indent-props': [ERROR, 2],
+    'react/jsx-indent': [ERROR, 2],
+    'react/jsx-one-expression-per-line': OFF,
+    'react/destructuring-assignment': OFF,
+    'react/state-in-constructor': OFF,
+    'react/jsx-props-no-spreading': OFF,
+    'react/prop-types': OFF,
+
+    'jsx-a11y/click-events-have-key-events': OFF,
+    'jsx-a11y/no-noninteractive-element-interactions': OFF,
+    'jsx-a11y/no-static-element-interactions': OFF,
+
+    'lines-between-class-members': [ERROR, 'always'],
+    // indent: [ERROR, 2, { SwitchCase: 1 }],
+    // 'linebreak-style': [ERROR, 'unix'],
+    quotes: [ERROR, 'single'],
+    semi: [ERROR, 'always'],
+    'no-unused-expressions': WARN,
+    'no-plusplus': OFF,
+    'no-console': OFF,
+    'class-methods-use-this': ERROR,
+    // 'jsx-quotes': [ERROR, 'prefer-single'],
+    'global-require': OFF,
+    'no-use-before-define': OFF,
+    'no-restricted-syntax': OFF,
+    'no-continue': OFF,
   },
-  // 针对 .d.ts 文件我们还需要要禁用一些规则
-  overrides: [
-    {
-      files: ['**/*.d.ts'],
-      rules: {
-        'import/no-duplicates': OFF,
-      },
-    },
-    {
-      files: ['scripts/**/*.ts'],
-      rules: {
-        'import/no-extraneous-dependencies': OFF,
-      },
-    },
-  ],
+  // overrides: [
+  //   {
+  //     files: ['**/*.d.ts'],
+  //     rules: {
+  //         'import/no-duplicates': OFF,
+  //     },
+  //   },
+  //   {
+  //     files: ['scripts/**/*.ts'],
+  //     rules: {
+  //         'import/no-extraneous-dependencies': OFF,
+  //     },
+  //   },
+  // ],
 };
