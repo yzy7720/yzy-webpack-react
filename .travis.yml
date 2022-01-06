@@ -1,3 +1,4 @@
+# 这是一个测试的配置文件（可以参考https://docs.travis-ci.com/user/tutorial/）
 language: node_js
 cache:
   - npm
