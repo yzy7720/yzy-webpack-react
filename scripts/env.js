@@ -3,6 +3,7 @@
 // 这样写不要好，有可能你们公司有很多环境，比如还有预发、灰度环境等等
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const isProduction = process.env.NODE_ENV === 'production';
+// console.log(process);
 
 module.exports = {
   isDevelopment,

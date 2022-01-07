@@ -8,12 +8,15 @@ const fs = require('fs');
 // 这里需要注意process.cwd和__dirname的区别
 // process.cwd()返回当前工作目录。如：调用node命令执行脚本时的目录。
 // __dirname返回源代码所在的目录
+// console.log(process);
 const appDirectory = fs.realpathSync(process.cwd());
+console.log('appDirectory', appDirectory);
 
 // 获取绝对路径的方法函数
 function resolveApp(relativePath) {
   return path.resolve(appDirectory, relativePath);
 }
+console.log('resolveApp', resolveApp('src'));
 
 // 默认extentions
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx'];

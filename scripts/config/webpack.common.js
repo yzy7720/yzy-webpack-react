@@ -16,6 +16,8 @@ const { isDevelopment, isProduction } = require('../env');
 // 引入配置文件，上文已讲
 const { imageInlineSizeLimit } = require('../conf');
 
+console.log('appHtml', paths.appHtml);
+
 // 这个函数是用来加载css相关loader的函数
 // 如果是开发环境用style-loader，将css内嵌到html中，反之css单独打包
 const getCssLoaders = (importLoaders) => [

@@ -111,7 +111,13 @@ module.exports = {
     'no-plusplus': OFF,
     'no-console': OFF,
     'class-methods-use-this': ERROR,
-    'jsx-quotes': [ERROR, 'prefer-single'],
+    // 'jsx-quotes': [ERROR, 'prefer-single'],
+    // 'prettier/prettier': [
+    //   OFF,
+    //   {
+    //     singleQuote: true,
+    //   },
+    // ],
     'global-require': OFF,
     'no-use-before-define': OFF,
     'no-restricted-syntax': OFF,

@@ -3,6 +3,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const paths = require('../paths');
+const { isDevelopment } = require('../env');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -23,7 +24,15 @@ module.exports = merge(common, {
       ...require(paths.appProxySetup),
     },
   },
-  plugins: [new Webpack.HotModuleReplacementPlugin(), new ErrorOverlayPlugin()],
+  plugins: [
+    new Webpack.HotModuleReplacementPlugin(),
+    new ErrorOverlayPlugin(),
+    new Webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: isDevelopment ? '"development"' : '"production"',
+      },
+    }),
+  ],
   optimization: {
     minimize: false,
     minimizer: [],
